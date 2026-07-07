@@ -91,7 +91,7 @@ function getSupportedFormats() {
 }
 
 /**
- * Scan raw directory, process files, update _index.md, and consolidate to md/_all.md
+ * Scan raw directory, process files, update index.md, and consolidate to md/_all.md
  * @param {string} projectDir
  * @param {object} options
  * @param {string[]} [options.formats] – array of extensions to include (e.g. ['.txt', '.docx']).
@@ -104,7 +104,7 @@ function getSupportedFormats() {
 async function scanAndProcess(projectDir, options = {}) {
   const rawDir = path.join(projectDir, 'raw');
   const mdDir = path.join(projectDir, 'md');
-  const indexFile = path.join(projectDir, '_index.md');
+  const indexFile = path.join(projectDir, 'index.md');
 
   if (!fs.existsSync(rawDir)) {
     fs.mkdirSync(rawDir, { recursive: true });
@@ -362,7 +362,7 @@ source_count: ${processedCount}
   logs.push(`*   **${timestamp}:** Converted ${processedCount} files to Markdown in \`md/\`.`);
   logs.push(`*   **${timestamp}:** Consolidated documents in alphabetical order into \`md/_all.md\`.`);
 
-  // Build _index.md
+  // Build index.md
   let indexContent = `# traNNsform Ingestion Manifest & Processing Log\n\n`;
   indexContent += `## Ingestion Status\n`;
   indexContent += `*   **Total Files Discovered:** ${totalDiscovered}\n`;

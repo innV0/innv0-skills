@@ -11,12 +11,13 @@ iNNv0 is a collection of self-contained, domain-specialized skills that teach yo
 ## Skills
 
 | Skill | Description |
-|---|---|
+|---|---|---|
 | **[Model Router](./skills/innv0-opencode-model-router/)** | Evaluates whether the active AI model is cost-effective for the task at hand. Classifies requests across 4 tiers and recommends optimal model tiers. |
+| **[Workflow Orchestrator](./skills/innv0-workflow-orchestrator/)** | Meta-skill that reads declarative workflow FORMAT files and coordinates multi-skill execution sequences (traNNsform, FORMAT, etc.) in sequential stages. |
 | **[Skills Manager](./skills/innv0-skills-manager/)** | Meta-skill that scans, audits, and installs all skills in the repository. Supports NTFS junctions, symlinks, and copy install modes. |
 | **[traNNsform](./skills/innv0-trannsform/)** | Document ingestion and transformation pipeline. Converts PDF, DOCX, XLSX, and more to unified Markdown using the agent's own LLM as the transformation engine. Ships with a Node.js CLI tool. |
 | **[Web Design Guide](./skills/innv0-web-design-guide/)** | Complete light-mode design system with Morado Nazareno palette (#4D0E4E), systematic typography (Plus Jakarta Sans, Playfair Display, Geist Mono), and 8px spacing grid. |
-| **[FORMAT](./skills/innv0-format/)** | Business process modeling framework with template-based authoring, marker-based matrices, and spec-driven dashboard renderers. |
+| **[iNNfo](./skills/innv0-innfo/)** | Semantic modeling with iNNfo V_0-2-0 (`_NN` markers), template-based authoring, marker-based matrices, and spec-driven dashboard renderers. |
 
 ## Getting Started
 
@@ -49,8 +50,9 @@ opencode .
 ```
 iNNv0_skills/
 ├── skills/                        # Skill modules (one per directory)
-│   ├── innv0-format/              #   Business process modeling
+│   ├── innv0-innfo/               #   iNNfo semantic modeling
 │   ├── innv0-opencode-model-router/  #   Model adequacy evaluator
+│   ├── innv0-workflow-orchestrator/  #   Multi-skill workflow orchestration
 │   ├── innv0-skills-manager/      #   Skills lifecycle management
 │   ├── innv0-trannsform/          #   Document ingestion pipeline
 │   └── innv0-web-design-guide/    #   Design system & brand guidelines

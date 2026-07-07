@@ -115,7 +115,7 @@ Write-Host "â”€â”€ Step 6: Run scan â”€â”€" -ForegroundColor
 Push-Location $SKILL_DIR
 try {
   node scripts/index.js --scan --src "$TEST_DIR\test-project" 2>&1 | Out-Null
-  Assert-True (Test-Path "$TEST_DIR\test-project\_index.md") "_index.md created"
+  Assert-True (Test-Path "$TEST_DIR\test-project\index.md") "index.md created"
   Assert-True (Test-Path "$TEST_DIR\test-project\md\hello.md") "hello.md created in md/"
   Assert-True (Test-Path "$TEST_DIR\test-project\md\_all.md") "_all.md created"
 

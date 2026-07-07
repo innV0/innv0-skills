@@ -155,15 +155,6 @@ async function configureDefaults() {
  */
 async function runBootstrapperFlow() {
   const defaultDest = config.getDefaultPath();
-  const templatesSrcDir = path.join(__dirname, '..', 'examples', 'traNNsformations');
-  let availableTemplates = [];
-  try {
-    if (fs.existsSync(templatesSrcDir)) {
-      availableTemplates = fs.readdirSync(templatesSrcDir).filter(f => f.endsWith('.md'));
-    }
-  } catch (err) {
-    // Ignore
-  }
 
   const questions = [
     {
@@ -198,12 +189,6 @@ async function runBootstrapperFlow() {
       initial: (prev, values) => values.useSrcAsDest ? 'traNNsform' : 'MyTransformProject',
       validate: value => value.trim().length > 0 ? true : 'Project name cannot be empty'
     },
-    {
-      type: availableTemplates.length > 0 ? 'multiselect' : null,
-      name: 'selectedTemplates',
-      message: 'Select transformation templates to copy (press Space to select):',
-      choices: availableTemplates.map(t => ({ title: t, value: t, selected: false }))
-    }
   ];
 
   const answers = await prompts(questions);
@@ -218,7 +203,7 @@ async function runBootstrapperFlow() {
   const targetDest = answers.useSrcAsDest ? answers.src : answers.dest.replace(/^["']|["']$/g, '').trim();
 
   const projectDir = path.join(targetDest, answers.name);
-  bootstrapProject(answers.src, targetDest, answers.name, answers.selectedTemplates || []);
+  bootstrapProject(answers.src, targetDest, answers.name);
   
   // Persist project dir as last used
   config.saveConfig({ lastProjectPath: projectDir });
@@ -230,7 +215,7 @@ async function runBootstrapperFlow() {
 /**
  * Perform actual bootstrapping directory creation & file copying
  */
-function bootstrapProject(srcDir, destParentDir, projectName, selectedTemplates = []) {
+function bootstrapProject(srcDir, destParentDir, projectName) {
   const projectDir = path.join(destParentDir, projectName);
   const rawDir = path.join(projectDir, 'raw');
   const mdDir = path.join(projectDir, 'md');
@@ -287,25 +272,7 @@ Agent skill: https://github.com/innV0/iNNv0_skills/tree/main/skills/innv0-tranns
 
   console.log(`Copied ${copiedCount} files to raw directory.`);
 
-  // Copy selected templates
-  const templatesSrcDir = path.join(__dirname, '..', 'examples', 'traNNsformations');
-  let copiedTemplatesCount = 0;
-  for (const templateName of selectedTemplates) {
-    const srcTemplatePath = path.join(templatesSrcDir, templateName);
-    const destTemplatePath = path.join(transDir, templateName);
-    try {
-      if (fs.existsSync(srcTemplatePath)) {
-        fs.copyFileSync(srcTemplatePath, destTemplatePath);
-        copiedTemplatesCount++;
-      }
-    } catch (err) {
-      console.warn(`Warning: Could not copy template "${templateName}": ${err.message}`);
-    }
-  }
 
-  if (copiedTemplatesCount > 0) {
-    console.log(`Copied ${copiedTemplatesCount} template(s) to traNNsformations directory.`);
-  }
 }
 
 /**
@@ -414,7 +381,7 @@ async function runProjectMenu(projectDir) {
       console.log('\n=== Ingestion Manifest Created ===');
       console.log(`Processed: ${result.processedCount} files successfully.`);
       console.log(`Skipped/Needs Review: ${result.skippedCount} files.`);
-      console.log(`Review the manifest log at: ${path.join(projectDir, '_index.md')}\n`);
+      console.log(`Review the manifest log at: ${path.join(projectDir, 'index.md')}\n`);
 
       return runProjectMenu(projectDir);
     }
@@ -435,7 +402,7 @@ async function runProjectMenu(projectDir) {
     console.log('\n=== Ingestion Manifest Created ===');
     console.log(`Processed: ${result.processedCount} files successfully.`);
     console.log(`Skipped/Needs Review: ${result.skippedCount} files.`);
-    console.log(`Review the manifest log at: ${path.join(projectDir, '_index.md')}\n`);
+    console.log(`Review the manifest log at: ${path.join(projectDir, 'index.md')}\n`);
 
     return runProjectMenu(projectDir);
   }

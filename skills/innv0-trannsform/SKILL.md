@@ -104,7 +104,7 @@ Depending on the user's decision for each format:
 node scripts/index.js --scan --src "<target-project-directory>"
 ```
 
-Read the generated `_index.md`. If there are files marked as `?` (docx, pdf) or `NO` (audio, images), inform the user.
+Read the generated `index.md`. If there are files marked as `?` (docx, pdf) or `NO` (audio, images), inform the user.
 
 ### 3. Transformation — Using the Agent's LLM
 

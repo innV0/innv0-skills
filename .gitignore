@@ -1,2 +1,6 @@
 # Skill dependencies — installed by the agent on first use
 skills/*/node_modules/
+
+# SDD skill registry cache (regenerated on init)
+.innv0/.skill-registry.cache.json
+

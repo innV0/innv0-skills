@@ -1,6 +1,6 @@
 # innv0-trannsform
 
-Agent skill for document ingestion, normalization, and template-based transformation. The agent orchestrates the full pipeline: bootstraps a project, scans raw documents of various formats, normalizes them to Markdown, then transforms the consolidated content using its own LLM guided by user-defined templates.
+Agent skill for document ingestion, normalization, and template-based transformation. The agent orchestrates the full workflow: bootstraps a project, scans raw documents of various formats, normalizes them to Markdown, then transforms the consolidated content using its own LLM guided by user-defined templates.
 
 ## How it works
 
@@ -9,7 +9,7 @@ The skill ships with a Node.js CLI tool (`scripts/index.js`) that handles file o
 The workflow is:
 
 1. **Bootstrap** — The agent creates a project directory with `raw/`, `md/`, `traNNsformations/`, and `output/` folders, then copies source files into `raw/`.
-2. **Scan & normalize** — The CLI tool reads files from `raw/`, converts supported formats to Markdown in `md/`, and generates an ingestion manifest (`_index.md`) plus a consolidated document (`md/_all.md`).
+2. **Scan & normalize** — The CLI tool reads files from `raw/`, converts supported formats to Markdown in `md/`, and generates an ingestion manifest (`index.md`) plus a consolidated document (`md/_all.md`).
 3. **Transform** — The agent reads the consolidated document and the user's chosen template, then generates a transformed output using its own LLM. The CLI tool serves as a fallback if the agent's context is insufficient.
 
 ## Installation

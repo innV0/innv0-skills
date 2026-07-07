@@ -63,7 +63,7 @@ Luis,28,Technician
 **Expected result:**
 - ✅ OpenCode executes `node scripts/index.js --scan --src test-docs`
 - ✅ Summary appears: "Discovered: X, Processed: Y, Skipped: Z"
-- ✅ `test-docs/_index.md` is created
+- ✅ `test-docs/index.md` is created
 - ✅ `test-docs/md/report.md` is created with the txt content
 - ✅ `test-docs/md/data.md` is created with the csv content
 - ✅ `test-docs/md/_all.md` is created with both documents consolidated
@@ -117,10 +117,9 @@ If you have a docx or pdf file in the source folder, when running the scan:
 
 **Instruction for OpenCode:**
 
-> Run the CLI fallback transformer with `node scripts/index.js --apply Generic_Normalizer --src test-docs`. Use the template that's in examples/ or copy it to traNNsformations/ first.
+> Run the CLI fallback transformer with `node scripts/index.js --apply Generic_Normalizer --src test-docs`. Place the template in test-docs/traNNsformations/ first.
 
 **Expected result:**
-- ✅ OpenCode copies `examples/traNNsformations/Generic_Normalizer.md` to `test-docs/traNNsformations/`
 - ✅ OpenCode runs the command
 - ✅ `output/Generic_Normalizer_[timestamp].md` is generated
 
